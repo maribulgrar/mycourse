@@ -43,7 +43,7 @@
                 | ADRIANA | ADRIANA@GMAIL.COM | 44522578  | RJ     |
                 +---------+-------------------+-----------+--------+
 
-    /* View */ 
+    /* View - DML */ 
 
         CREATE View V_Relatorio AS
             SELECT  c.nome,
@@ -134,3 +134,92 @@
         UPDATE Pieces 
         set SuperPower = 'Sword'
         where idpieces = 2;
+
+        ALTER TABLE Pieces  
+        CHANGE SuperPower Weapon VARCHAR (30) not null; /* Precisa especificar as características do 
+        tipo de coluna descritas no create */
+
+        +----------+-------------+------+-----+---------+----------------+
+        | Field    | Type        | Null | Key | Default | Extra          |
+        +----------+-------------+------+-----+---------+----------------+
+        | IDPIECES | int         | NO   | PRI | NULL    | auto_increment |
+        | Nameof   | varchar(15) | YES  |     | NULL    |                |
+        | Strength | varchar(30) | YES  |     | NULL    |                |
+        | Weakness | varchar(30) | YES  |     | NULL    |                |
+        | Weapon   | varchar(30) | NO   |     | NULL    |                |
+        +----------+-------------+------+-----+---------+----------------+
+
+
+/* Order By */
+
+    CREATE TABLE Alunos ( 
+        Numero INT,
+        Nome VARCHAR (30)
+    );
+
+            INSERT INTO ALUNOS VALUES(1,'JOAO');
+            INSERT INTO ALUNOS VALUES(1,'MARIA');
+            INSERT INTO ALUNOS VALUES(2,'ZOE');
+            INSERT INTO ALUNOS VALUES(2,'ANDRE');
+            INSERT INTO ALUNOS VALUES(3,'CLARA');
+            INSERT INTO ALUNOS VALUES(1,'CLARA');
+            INSERT INTO ALUNOS VALUES(4,'MAFRA');
+            INSERT INTO ALUNOS VALUES(5,'JANAINA');
+            INSERT INTO ALUNOS VALUES(1,'JANAINA');
+            INSERT INTO ALUNOS VALUES(3,'MARCELO');
+            INSERT INTO ALUNOS VALUES(4,'GIOVANI');
+            INSERT INTO ALUNOS VALUES(5,'ANTONIO');
+            INSERT INTO ALUNOS VALUES(6,'ANA');
+            INSERT INTO ALUNOS VALUES(6,'VIVIANE'); 
+
+
+        /* Ordernando por mais de uma coluna */
+
+        SELECT * FROM Alunos
+        ORDER BY 1;
+
+        SELECT * FROM Alunos
+        ORDER BY 1, 2;
+
+        /* Order by DESC / ASC */
+
+            SELECT * FROM Alunos
+            ORDER BY 1, 2;
+
+            SELECT * FROM Alunos 
+            ORDER BY 1 ASC; /* Ordem natural do banco, não precisa usar */
+
+            SELECT * FROM Alunos 
+            ORDER BY 1 DESC;
+
+            SELECT * FROM Alunos
+            ORDER BY 1,2 DESC;
+
+            SELECT * FROM Alunos
+            ORDER BY 1 DESC,2 DESC;
+
+        /* Ordenando com Joins */
+
+            CREATE View V_Relatorio AS
+            SELECT  c.nome,
+                    c.sexo,
+                    IFNULL (c.email, 'Não possui') AS Email,
+                    t.tipo,
+                    t.numero,
+                    e.bairro,
+                    e.cidade,
+                    e.estado
+
+            FROM Cliente C
+            INNER JOIN endereco E
+            ON c.idcliente = e.id_cliente
+            INNER JOIN telefone t 
+            ON c.idcliente = t.id_cliente
+            ORDER BY 1;
+
+            SELECT email FROM cliente
+            ORDER BY 1;
+
+            UPDATE CLIENTE 
+            SET email = 'NULL'
+            WHERE IDCLIENTE = 7;

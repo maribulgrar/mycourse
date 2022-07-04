@@ -80,7 +80,6 @@
     ON C.IDCLIENTE = T.ID_CLIENTE;
 
 
-
 /* CATEGORIAS DA LINGUAGEM SQL 
 
     - DML: DATA MANIPULATION LANGUAGE
@@ -142,7 +141,17 @@
 
 
         ALTER TABLE PRODUTO
-        CHANGE PRECO_PRODUTO PRECO_PRODUTO INT;
+        CHANGE PRECO_PRODUTO PRECO INT;
+
+        +--------------+-------------+------+-----+---------+----------------+
+        | Field        | Type        | Null | Key | Default | Extra          |
+        +--------------+-------------+------+-----+---------+----------------+
+        | QUANTIDADE   | float(10,2) | NO   |     | NULL    |                |
+        | IDPRODUTO    | int         | NO   | PRI | NULL    | auto_increment |
+        | NOME_PRODUTO | varchar(30) | NO   |     | NULL    |                |
+        | PRECO        | int         | YES  |     | NULL    |                |
+        | FRETE        | float(10,2) | NO   |     | NULL    |                |
+        +--------------+-------------+------+-----+---------+----------------+
 
     /*  MODIFY - ALTERANDO O TIPO */
 
